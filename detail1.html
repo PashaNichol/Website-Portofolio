@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="p2.css">
+    <script>
+        function handleBuy (){
+            const size = document.getElementById("product-size").value;
+
+            if (size === "") {
+                alert("Please select a size before proceeding");
+                return false;
+            }
+
+            localStorage.setItem("selectedSize", size);
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <div>
+            <img src="" alt="">
+        </div>
+        <ul>
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#product2">Product</a>
+            </li>
+            <li>
+                <a href="#contact us">Contact</a>
+            </li>
+
+            <li>
+                <a href="#">Login</a>
+            </li> 
+        </ul>
+    </nav>
+
+
+    <main class="product-detail">
+        <div class="detail-card">
+            <button class="close-button" onclick="history.back()">X</button>
+            <img src="images/sepatu1.png" alt="Nike">
+            <h2>Rp.3.937.000,00</h2>
+            <p>Nike Mercurial</p>
+
+            <label for="product-size">Choose your size</label>
+            <select name="size" id="product-size" required>
+                <option value="" disabled selected>-- Select Size --</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+            </select>
+
+            <a href="payment.html" class="buy-button" onclick="return handleBuy()">Buy</a>
+
+        </div>
+    </main>
+
+    
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>success</title>
+    <link rel="stylesheet" href="p2.css">
+</head>
+<body>
+    <nav>
+        <div>
+            <img src="" alt="">
+        </div>
+        <ul>
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#product2">Product</a>
+            </li>
+            <li>
+                <a href="#contact us">Contact</a>
+            </li>
+
+            <li>
+                <a href="#">Login</a>
+            </li> 
+        </ul>
+    </nav>
+
+
+    <main class="success-page">
+        <div class="success-card">
+            <h2>Payment Successful!</h2>
+            <p>Thank you for purchasing Nike Zoom Mercurial Superfly 9.</p>
+            <p>Your selected size is <span id="product-size"></span>.</p>
+            <p>Your order will be processed shortly.</p>
+            <a href="p2.html" class="back-to-home-button">Back to Home</a>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Ambil data ukuran dari query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const size = urlParams.get('size');
+
+    // Tampilkan ukuran di halaman
+    document.getElementById('product-size').textContent = size ? size : "N/A";
+</script>
+
+</body>
+</html>

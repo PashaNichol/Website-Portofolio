@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>payment</title>
+    <link rel="stylesheet" href="p2.css">
+    <script>
+        window.onload = function () {
+            const selectedSize = localStorage.getItem("selectedSize");
+
+            // Jika ukuran sudah dipilih, tampilkan di halaman
+            if (selectedSize) {
+                document.getElementById("selected-size").textContent = selectedSize;
+            } else {
+                // Jika tidak ada ukuran yang disimpan, beri peringatan dan redirect kembali ke halaman detail
+                alert("Please select a size before proceeding!");
+                window.location.href = "detail1.html"; // Kembali ke halaman detail untuk memilih ukuran
+            }
+        };
+
+        function showPaymentForm() {
+            const method = document.querySelector('input[name="payment-method"]:checked').value;
+            const creditCardForm = document.getElementById("credit-card-form");
+            const bankForm = document.getElementById("bank-form");
+
+            // Tampilkan form sesuai metode pembayaran yang dipilih
+            if (method === "credit-card") {
+                creditCardForm.style.display = "block";
+                bankForm.style.display = "none";
+            } else if (method === "bank-transfer") {
+                creditCardForm.style.display = "none";
+                bankForm.style.display = "block";
+            }
+        }
+
+        function redirectToSuccess(event) {
+            event.preventDefault(); // Mencegah submit default
+
+            const selectedSize = localStorage.getItem("selectedSize");
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+            // Redirect ke success.html dengan data ukuran dan metode pembayaran di query string
+            window.location.href = `success.html?size=${encodeURIComponent(selectedSize)}&method=${encodeURIComponent(paymentMethod)}`;
+        }
+
+    </script>
+</head>
+<body>
+    <nav>
+        <div>
+            <img src="" alt="">
+        </div>
+        <ul>
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#product2">Product</a>
+            </li>
+            <li>
+                <a href="#contact us">Contact</a>
+            </li>
+
+            <li>
+                <a href="#">Login</a>
+            </li> 
+        </ul>
+    </nav>
+
+    <main class="payment-page">
+            <div class="payment-card">
+                <h2>Payment</h2>
+                <p>Product: Nike Zoom Mercurial Superfly 9</p>
+                <p>Price: Rp.799.000,00</p>
+
+                <!-- Menampilkan Ukuran yang Dipilih -->
+                <p>Size Selected: <span id="selected-size"></span></p>
+
+                <!-- Pilihan Metode Pembayaran -->
+                <link rel="stylesheet" href="metode pembayaran.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <div class="container">
+                    <div class="title">
+                        <h4>Select a <span style="color: #6064b6">Payment</span> method</h4>
+                    </div>
+            
+                    <form action="#">
+                        <input type="radio" name="payment" id="visa">
+                        <input type="radio" name="payment" id="mastercard">
+                        <input type="radio" name="payment" id="paypal">
+                        <input type="radio" name="payment" id="AMEX">
+            
+            
+                        <div class="category">
+                            <label for="visa" class="visaMethod">
+                                <div class="imgName">
+                                    <div class="imgContainer visa">
+                                        <img src="images-removebg-preview.png" alt="">
+                                    </div>
+                                    <span class="name">VISA</span>
+                                </div>
+                                <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                            </label>
+            
+                            <label for="mastercard" class="mastercardMethod">
+                                <div class="imgName">
+                                    <div class="imgContainer mastercard">
+                                        <img src="images__1_-removebg-preview.png" alt="">
+                                    </div>
+                                    <span class="name">Mastercard</span>
+                                </div>
+                                <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                            </label>
+            
+                            <label for="paypal" class="paypalMethod">
+                                <div class="imgName">
+                                    <div class="imgContainer paypal">
+                                        <img src="https://i.ibb.co/KVF3mr1/paypal.png" alt="">
+                                    </div>
+                                    <span class="name">Paypal</span>
+                                </div>
+                                <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                            </label>
+            
+                            <label for="AMEX" class="amexMethod">
+                                <div class="imgName">
+                                    <div class="imgContainer AMEX">
+                                        <img src="https://i.ibb.co/wQnrX86/American-Express.jpg" alt="">
+                                    </div>
+                                    <span class="name">AMEX</span>
+                                </div>
+                                <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+
+                <h3>Choose Payment Method:</h3>
+                <div>
+                    <input type="radio" id="credit-card" name="payment-method" value="credit-card"
+                        onclick="showPaymentForm()" required>
+                    <label for="credit-card">Credit Card</label>
+                </div>
+                <div>
+                    <input type="radio" id="bank-transfer" name="payment-method" value="bank-transfer"
+                        onclick="showPaymentForm()">
+                    <label for="bank-transfer">Bank Transfer</label>
+                </div>
+
+                <!-- Form untuk Kartu Kredit -->
+                <form id="credit-card-form" style="display: none;" onsubmit="redirectToSuccess(event)">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9101 1121" required>
+
+                    <label for="expiry-date">Expiry Date</label>    
+                    <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123" required>
+
+                    <button type="submit" class="pay-button">Pay Now</button>
+                </form>
+
+                <!-- Form untuk Bank Transfer -->
+                <form id="bank-form" style="display: none;" onsubmit="redirectToSuccess(event)">
+                    <label for="bank-name">Bank Name</label>
+                    <select id="bank-name" name="bank-name" required>
+                        <option value="" disabled selected>Select Bank</option>
+                        <option value="bca">BCA</option>
+                        <option value="mandiri">Mandiri</option>
+                        <option value="bni">BNI</option>
+                        <option value="bri">BRI</option>
+                    </select>
+                    <br>
+                    <label for="account-number">Account Number</label>
+                    <input type="text" id="account-number" name="account-number" placeholder="1234567890" required>
+
+                    <button type="submit" class="pay-button">Pay Now</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+
+</body>
+</html>
